@@ -1,5 +1,28 @@
 function Convert(numberToConvert) {
-    let differenceLeftToConvert = numberToConvert;
+    if (isNaN(parseInt(numberToConvert))){
+        return ConvertFromRomanToInt(numberToConvert);
+    }
+    return ConvertFromIntToRoman(numberToConvert);
+}
+
+function ConvertFromRomanToInt(numberToConvert){
+    let result = 0;
+    for(i = 0; i<numberToConvert.length; i++){
+        let number;
+        let aggregationOfTheNextTwoCharacters = numberToConvert[i] + numberToConvert[i + 1];
+        if (romanDictionary.indexOf(aggregationOfTheNextTwoCharacters) != -1){
+            number = romanDictionary.indexOf(aggregationOfTheNextTwoCharacters);
+            i = i +1;
+        }
+        else{
+            number = romanDictionary.indexOf(numberToConvert[i]);
+        }
+        result += number;
+    }
+    return result;
+}
+function ConvertFromIntToRoman(numberToConvert){
+        let differenceLeftToConvert = numberToConvert;
     let romanNumber = "";
     while (differenceLeftToConvert != 0) {
         let literalNumberToAdd = GetLowerMatchSymbol(differenceLeftToConvert);        
